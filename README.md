@@ -1,199 +1,270 @@
-# DLIP LAB4
+<div align="center">
+<p>
+<a align="left" href="https://ultralytics.com/yolov5" target="_blank">
+<img width="850" src="https://github.com/ultralytics/yolov5/releases/download/v1.0/splash.jpg"></a>
+</p>
+<br>
+<div>
+<a href="https://github.com/ultralytics/yolov5/actions"><img src="https://github.com/ultralytics/yolov5/workflows/CI%20CPU%20testing/badge.svg" alt="CI CPU testing"></a>
+<a href="https://zenodo.org/badge/latestdoi/264818686"><img src="https://zenodo.org/badge/264818686.svg" alt="Open In Kaggle"></a>
+<br>  
+<a href="https://colab.research.google.com/github/ultralytics/yolov5/blob/master/tutorial.ipynb"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"></a>
+<a href="https://www.kaggle.com/ultralytics/yolov5"><img src="https://kaggle.com/static/images/open-in-kaggle.svg" alt="Open In Kaggle"></a>
+<a href="https://hub.docker.com/r/ultralytics/yolov5"><img src="https://img.shields.io/docker/pulls/ultralytics/yolov5?logo=docker" alt="Docker Pulls"></a>
+</div>
+  <br>
+  <div align="center">
+    <a href="https://github.com/ultralytics">
+        <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-social-github.png" width="2%"/>
+    </a>
+    <img width="2%" />
+    <a href="https://www.linkedin.com/company/ultralytics">
+        <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-social-linkedin.png" width="2%"/>
+    </a>
+    <img width="2%" />
+    <a href="https://twitter.com/ultralytics">
+        <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-social-twitter.png" width="2%"/>
+    </a>
+    <img width="2%" />
+    <a href="https://youtube.com/ultralytics">
+        <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-social-youtube.png" width="2%"/>
+    </a>
+    <img width="2%" />
+    <a href="https://www.facebook.com/ultralytics">
+        <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-social-facebook.png" width="2%"/>
+    </a>
+    <img width="2%" />
+    <a href="https://www.instagram.com/ultralytics/">
+        <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-social-instagram.png" width="2%"/>
+    </a>
+</div>
 
-# 1. Subject
-### Automatic key limitation measurement program when boarding rides in amusement parks.
+<br>
+<p>
+YOLOv5 🚀 is a family of object detection architectures and models pretrained on the COCO dataset, and represents <a href="https://ultralytics.com">Ultralytics</a>
+ open-source research into future vision AI methods, incorporating lessons learned and best practices evolved over thousands of hours of research and development.
+</p>
+
+<!-- 
+<a align="center" href="https://ultralytics.com/yolov5" target="_blank">
+<img width="800" src="https://github.com/ultralytics/yolov5/releases/download/v1.0/banner-api.png"></a>
+-->
+
+</div>
+
+
+## <div align="center">Documentation</div>
+
+See the [YOLOv5 Docs](https://docs.ultralytics.com) for full documentation on training, testing and deployment.
+
+
+## <div align="center">Quick Start Examples</div>
+
+
+<details open>
+<summary>Install</summary>
+
+Python >= 3.6.0 required with all [requirements.txt](https://github.com/ultralytics/yolov5/blob/master/requirements.txt) dependencies installed:
+<!-- $ sudo apt update && apt install -y libgl1-mesa-glx libsm6 libxext6 libxrender-dev -->
+```bash
+$ git clone https://github.com/ultralytics/yolov5
+$ cd yolov5
+$ pip install -r requirements.txt
+```
+</details>
+
+<details open>
+<summary>Inference</summary>
+
+Inference with YOLOv5 and [PyTorch Hub](https://github.com/ultralytics/yolov5/issues/36). Models automatically download from the [latest YOLOv5 release](https://github.com/ultralytics/yolov5/releases).
+
+```python
+import torch
+
+# Model
+model = torch.hub.load('ultralytics/yolov5', 'yolov5s')  # or yolov5m, yolov5x, custom
+
+# Images
+img = 'https://ultralytics.com/images/zidane.jpg'  # or file, PIL, OpenCV, numpy, multiple
+
+# Inference
+results = model(img)
+
+# Results
+results.print()  # or .show(), .save(), .crop(), .pandas(), etc.
+```
+
+</details>
 
 
 
+<details>
+<summary>Inference with detect.py</summary>
 
-# 2. Background
-#### There are many rides in the amusement park with height restrictions. Failure to comply with height restrictions can lead to safety accidents immediately. There are many people who want to board without complying with the height limit, and it is difficult for amusement park staff to check all of them. If you can recognize a person through a camera and measure his or her height in real time while standing in line at an amusement park, it can help prevent safety accidents. In addition, if the height limit is violated, an alarm may be displayed to determine whether it is possible to board easily and quickly.
+`detect.py` runs inference on a variety of sources, downloading models automatically from the [latest YOLOv5 release](https://github.com/ultralytics/yolov5/releases) and saving results to `runs/detect`.
+```bash
+$ python detect.py --source 0  # webcam
+                            file.jpg  # image 
+                            file.mp4  # video
+                            path/  # directory
+                            path/*.jpg  # glob
+                            'https://youtu.be/NUsoVlDFqZg'  # YouTube video
+                            'rtsp://example.com/media.mp4'  # RTSP, RTMP, HTTP stream
+```
+
+</details>
+
+<details>
+<summary>Training</summary>
+
+Run commands below to reproduce results on [COCO](https://github.com/ultralytics/yolov5/blob/master/data/scripts/get_coco.sh) dataset (dataset auto-downloads on first use). Training times for YOLOv5s/m/l/x are 2/4/6/8 days on a single V100 (multi-GPU times faster). Use the largest `--batch-size` your GPU allows (batch sizes shown for 16 GB devices).
+```bash
+$ python train.py --data coco.yaml --cfg yolov5s.yaml --weights '' --batch-size 64
+                                         yolov5m                                40
+                                         yolov5l                                24
+                                         yolov5x                                16
+```
+<img width="800" src="https://user-images.githubusercontent.com/26833433/90222759-949d8800-ddc1-11ea-9fa1-1c97eed2b963.png">
+
+</details>  
+
+<details open>
+<summary>Tutorials</summary>
+
+* [Train Custom Data](https://github.com/ultralytics/yolov5/wiki/Train-Custom-Data)&nbsp; 🚀 RECOMMENDED
+* [Tips for Best Training Results](https://github.com/ultralytics/yolov5/wiki/Tips-for-Best-Training-Results)&nbsp; ☘️ RECOMMENDED
+* [Weights & Biases Logging](https://github.com/ultralytics/yolov5/issues/1289)&nbsp; 🌟 NEW
+* [Supervisely Ecosystem](https://github.com/ultralytics/yolov5/issues/2518)&nbsp; 🌟 NEW
+* [Multi-GPU Training](https://github.com/ultralytics/yolov5/issues/475)
+* [PyTorch Hub](https://github.com/ultralytics/yolov5/issues/36)&nbsp; ⭐ NEW
+* [TorchScript, ONNX, CoreML Export](https://github.com/ultralytics/yolov5/issues/251) 🚀
+* [Test-Time Augmentation (TTA)](https://github.com/ultralytics/yolov5/issues/303)
+* [Model Ensembling](https://github.com/ultralytics/yolov5/issues/318)
+* [Model Pruning/Sparsity](https://github.com/ultralytics/yolov5/issues/304)
+* [Hyperparameter Evolution](https://github.com/ultralytics/yolov5/issues/607)
+* [Transfer Learning with Frozen Layers](https://github.com/ultralytics/yolov5/issues/1314)&nbsp; ⭐ NEW
+* [TensorRT Deployment](https://github.com/wang-xinyu/tensorrtx)
+
+</details>
 
 
-# 3. Theory
-1. yolov5
-#### Conventional yolov3 had higher frame per seconds (FPS), while mean average precision (mAP) was a relatively lower model. However, yolov5 outperforms both in terms of FPS and mAP. And unlike other models of the yolo, the yolov5 is divided into sizes.  Yolov5s, Yolov5m, Yolov5l, Yolov5x, which is easy to distinguish if you think of it as small, medium, large, and xlarge.  This division is the difference between depth multiple (model multiple) and width multiple (layer width multiple).
-<img src="./yolov5.png" width="450px" height="300px" title="Yolov5 Performance Comparison Table"></img><br/>
-#### Accuracy and speed are conflicting and cannot be caught altogether. Instead of s being the fastest, accuracy is reduced and x being the slowest, accuracy is improved. The reason why YOLOv5 is faster than the existing YOLO series is the difference between backbone and head. The Backbone part extracts Feature Map from the image, similar to yolov4. The point here is that we used CSPNet. The head part is to locate an object based on Feature Map. The Anchor Box (Default Box) is initially set up and then used to create the final bounding box. We generate bounding boxes on three scales and use three anchor boxes on each scale.
+## <div align="center">Environments and Integrations</div>
 
-2. Coco dataset
-#### We present a new dataset with the goal of advancing the state-of-the-art in object recognition by placing the question of object recognition in the context of the broader question of scene understanding. This is achieved by gathering images of complex everyday scenes containing common objects in their natural context. Objects are labeled using per-instance segmentations to aid in precise object localization. Our dataset contains photos of 91 objects types that would be easily recognizable by a 4 year old. With a total of 2.5 million labeled instances in 328k images, the creation of our dataset drew upon extensive crowd worker involvement via novel user interfaces for category detection, instance spotting and instance segmentation. We present a detailed statistical analysis of the dataset in comparison to PASCAL, ImageNet, and SUN. Finally, we provide baseline performance analysis for bounding box and segmentation detection results using a Deformable Parts Model
--	Train2017 (19G)
--	Val2017 (788M)
--	Test2017(6.3G)
--	Annotations(808M)
+Get started in seconds with our verified environments and integrations, including [Weights & Biases](https://wandb.ai/site?utm_campaign=repo_yolo_readme) for automatic YOLOv5 experiment logging. Click each icon below for details.
 
-
-# 4. Process
-1. Use yolov5, coco dataset
-2. Detect people using person class only
-3. Gets the coordinates of the bounding box
-4. Replace xyxy with xywh
-5. Pixel value if only 5.h is imported
-6. Match it with the actual person's height
-7. Show results
-
-
-# 5. Code
-1. Add Virtual Environment
-  ```
-  conda create -n test_envs python=3.8  
-  ```
-#### You can add a virtual environment with the command 'conda create -n' and write the desired virtual environment name immediately after it.
-#### 'python= x.x' can then be used to set the python version of the virtual environment.
-
-2. Check the list of virtual environments
-
-  ```
-  conda info --envs
-  ```
-  <img src="./2.png" width="650px" height="300px" title="Yolov5 Performance Comparison Table"></img><br/>
-
-#### If you look at the list again, you can see that an environment named test_envs has been added.
+<div align="center">
+    <a href="https://colab.research.google.com/github/ultralytics/yolov5/blob/master/tutorial.ipynb">
+        <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-colab-small.png" width="15%"/>
+    </a>
+    <a href="https://www.kaggle.com/ultralytics/yolov5">
+        <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-kaggle-small.png" width="15%"/>
+    </a>
+    <a href="https://hub.docker.com/r/ultralytics/yolov5">
+        <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-docker-small.png" width="15%"/>
+    </a>
+    <a href="https://github.com/ultralytics/yolov5/wiki/AWS-Quickstart">
+        <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-aws-small.png" width="15%"/>
+    </a>
+    <a href="https://github.com/ultralytics/yolov5/wiki/GCP-Quickstart">
+        <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-gcp-small.png" width="15%"/>
+    </a>
+    <a href="https://wandb.ai/site?utm_campaign=repo_yolo_readme">
+        <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-wb-small.png" width="15%"/>
+    </a>
+</div>  
 
 
-3. Activate Virtual Environment
+## <div align="center">Compete and Win</div>
 
-  ```
-  conda activate test_envs
-  ```
+We are super excited about our first-ever Ultralytics YOLOv5 🚀 EXPORT Competition with **$10,000** in cash prizes!  
 
-#### Performing such as 'activate test_envs' will enable the virtual environment, and you will see that the (base) that was originally active will be replaced with (test_envs)
+<div align="center">
+<a href="https://github.com/ultralytics/yolov5/discussions/3213">
+    <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/banner-export-competition.png"/>
+</a>
+</div>
 
-4. Install git
 
-  ```
-  Conda install git
-  ```
+## <div align="center">Why YOLOv5</div>
 
-5. Clone the yolov5 Github Code
+<p align="center"><img width="800" src="https://user-images.githubusercontent.com/26833433/114313216-f0a5e100-9af5-11eb-8445-c682b60da2e3.png"></p>
+<details>
+  <summary>YOLOv5-P5 640 Figure (click to expand)</summary>
+  
+<p align="center"><img width="800" src="https://user-images.githubusercontent.com/26833433/114313219-f1d70e00-9af5-11eb-9973-52b1f98d321a.png"></p>
+</details>
+<details>
+  <summary>Figure Notes (click to expand)</summary>
+  
+  * GPU Speed measures end-to-end time per image averaged over 5000 COCO val2017 images using a V100 GPU with batch size 32, and includes image preprocessing, PyTorch FP16 inference, postprocessing and NMS. 
+  * EfficientDet data from [google/automl](https://github.com/google/automl) at batch size 8.
+  * **Reproduce** by `python test.py --task study --data coco.yaml --iou 0.7 --weights yolov5s6.pt yolov5m6.pt yolov5l6.pt yolov5x6.pt`
+</details>
 
-  ```
-  git clone https://github.com/ultralytics/yolov5.git
-  ```
 
-6. Move to yolov5 folder
+### Pretrained Checkpoints
 
-  ```
-  Cd yolov5
-  ```
+[assets]: https://github.com/ultralytics/yolov5/releases
 
-7. Use Editor
+|Model |size<br><sup>(pixels) |mAP<sup>val<br>0.5:0.95 |mAP<sup>test<br>0.5:0.95 |mAP<sup>val<br>0.5 |Speed<br><sup>V100 (ms) | |params<br><sup>(M) |FLOPs<br><sup>640 (B)
+|---                    |---  |---      |---      |---      |---     |---|---   |---
+|[YOLOv5s][assets]      |640  |36.7     |36.7     |55.4     |**2.0** |   |7.3   |17.0
+|[YOLOv5m][assets]      |640  |44.5     |44.5     |63.1     |2.7     |   |21.4  |51.3
+|[YOLOv5l][assets]      |640  |48.2     |48.2     |66.9     |3.8     |   |47.0  |115.4
+|[YOLOv5x][assets]      |640  |**50.4** |**50.4** |**68.8** |6.1     |   |87.7  |218.8
+|                       |     |         |         |         |        |   |      |
+|[YOLOv5s6][assets]     |1280 |43.3     |43.3     |61.9     |**4.3** |   |12.7  |17.4
+|[YOLOv5m6][assets]     |1280 |50.5     |50.5     |68.7     |8.4     |   |35.9  |52.4
+|[YOLOv5l6][assets]     |1280 |53.4     |53.4     |71.1     |12.3    |   |77.2  |117.7
+|[YOLOv5x6][assets]     |1280 |**54.4** |**54.4** |**72.0** |22.4    |   |141.8 |222.9
+|                       |     |         |         |         |        |   |      |
+|[YOLOv5x6][assets] TTA |1280 |**55.0** |**55.0** |**72.0** |70.8    |   |-     |-
 
-  ```
-  Code .
-  ```
+<details>
+  <summary>Table Notes (click to expand)</summary>
+  
+  * AP<sup>test</sup> denotes COCO [test-dev2017](http://cocodataset.org/#upload) server results, all other AP results denote val2017 accuracy.  
+  * AP values are for single-model single-scale unless otherwise noted. **Reproduce mAP** by `python test.py --data coco.yaml --img 640 --conf 0.001 --iou 0.65`  
+  * Speed<sub>GPU</sub> averaged over 5000 COCO val2017 images using a GCP [n1-standard-16](https://cloud.google.com/compute/docs/machine-types#n1_standard_machine_types) V100 instance, and includes FP16 inference, postprocessing and NMS. **Reproduce speed** by `python test.py --data coco.yaml --img 640 --conf 0.25 --iou 0.45`  
+  * All checkpoints are trained to 300 epochs with default settings and hyperparameters (no autoaugmentation). 
+  * Test Time Augmentation ([TTA](https://github.com/ultralytics/yolov5/issues/303)) includes reflection and scale augmentation. **Reproduce TTA** by `python test.py --data coco.yaml --img 1536 --iou 0.7 --augment`
+</details>
 
-8. Install all required libraries (requirement.txt)
 
-  ```
-  pip install -r requirements.txt
-  ```
+## <div align="center">Contribute</div>
 
-9. Modify detect.py File
+We love your input! We want to make contributing to YOLOv5 as easy and transparent as possible. Please see our [Contributing Guide](CONTRIBUTING.md) to get started. 
 
-   1) Find the box coordinates of objects
 
-   ​	Specifies the permitted text and the non-permitted text. And when the desired class is found in the received image, it is the 	code that gets the coordinates for it.
+## <div align="center">Contact</div>
 
-   ```python
-   allow_txt='Available'
-   warning_txt='No rides allowed!!'
-   for *xyxy, conf, cls in reversed(det):
-       if save_txt:  # Write to file
-           xywh = (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # normalized xywh
-           line = (cls, *xywh, conf) if opt.save_conf else (cls, *xywh)  # label format
-   
-           with open(txt_path + '.txt', 'a') as f:
-           f.write(('%g ' * len(line)).rstrip() % line + '\n')
-   ```
+For issues running YOLOv5 please visit [GitHub Issues](https://github.com/ultralytics/yolov5/issues). For business or professional support requests please visit 
+[https://ultralytics.com/contact](https://ultralytics.com/contact).
 
-   
+<br>
 
-    2)  Size calculation using curve fitting and bounding box
-
-   * Curve Fitting
-
-     <img src="./fitting.png" width="650px" height="300px" title="Curve Fitting of real world to cam"></img>
-
-     
-
-     As shown in the figure above, it is possible to fit the difference between the real environment and the USB camera through secondary curve fitting. The second order curve fitting is used because the USB camera is located at the bottom. Therefore, it is difficult to represent the change according to the actual height change in a straight line. Therefore, a second-order curve fitting was used.
-
-     
-
-   3) Code of script
-
-   ```python
-   box_height = float(xyxy[3]-xyxy[1])
-   person_height = pow(box_height,2)*0.0004099+box_height*0.2692+20.39
-   print(person_height)
-   ```
-
-   $$
-   xyxy[3] - xyxy[1]:{\text{the vertical size of the box}}
-   $$
-
-   $$
-   person\_height = 0.0004099 \times box\_height^2  + box\_height \times 0.2692 + 20.39
-   $$
-
-   
-
-   ```python
-   if save_img or opt.save_crop or view_img:  # Add bbox to image
-       c = int(cls)  # integer class{                        
-       if(person_height>150):
-       label = None if opt.hide_labels else (names[c] if opt.hide_conf else f'{allow_txt}--			{person_height:.2f}cm')
-       plot_one_box(xyxy, im0, label=label, color=colors(34, True), line_thickness=opt.line_thickness)                            
-       elif(person_height<=150):
-       label = None if opt.hide_labels else (names[c] if opt.hide_conf else f'{warning_txt}--		{person_height:.2f}cm')
-       plot_one_box(xyxy, im0, label=label, color=colors(31, True), line_thickness=opt.line_thickness)
-       if opt.save_crop:
-       save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
-   ```
-
-   The text of the label box is output differently depending on the size of the person.
-
-   
-
-   ```python
-   cv2.line(im0, (200,450), (640,450),(255,255,0),thickness=3)
-   ```
-
-   Code that draws the target's toe baseline.
-
-10. Practice
-
-  ```python
-  python .\detect.py --weights .\yolov5l.pt --source 0 --view --nosave  --classes 0
-  ```
-
-11. Output
-
-  <img src="./output.png" width="650px" height="300px" title="Yolov5 Performance Comparison Table"></img><br/>
-
-# 6. Analysis
-#### It was tested on five people for verification.
-##### 1. Actual height of 5 people
-- 170cm 
-- 174cm 
-- 168cm 
-- 183cm 
-- 179cm
-
-##### 2. Keys measured using the program
-<img src="./height.png" width="450px" height="300px" title="Yolov5 Performance Comparison Table"></img><br/>
-
-##### 3. MSE evaluation per person
-<img src="./MSE.png" width="250px" height="300px" title="Yolov5 Performance Comparison Table"></img><br/>
-
-##### The average value of MSE is 0.8463. The MSE evaluation method verified that the accuracy of the program is very high.
-
-# 7. Limit
-- The position of the camera and the position of the person should be fixed because depth data cannot be imported.
-- There is a problem that it is not accurate when the camera position or the person position changes.
-- The resolution is limited because bounding boxes are imported in pixels.
-
-# 8. Conclustion
-#### I can confirm that it measures more accurately than I thought. It can be applied to other situations besides amusement parks. The following are typical examples. It is important for 119 ambulances to quickly measure the patient's physical information such as height, weight, pulse, and blood type and send it to the hospital. Patients' exact biometric data can be sent to hospitals in a short time to increase their chances of survival. In these environments, it is expected that key measurement programs using yolov5 will be useful. If a key measurement program is applied, it will not only be available in this but also in more diverse fields.
+<div align="center">
+    <a href="https://github.com/ultralytics">
+        <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-social-github.png" width="3%"/>
+    </a>
+    <img width="3%" />
+    <a href="https://www.linkedin.com/company/ultralytics">
+        <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-social-linkedin.png" width="3%"/>
+    </a>
+    <img width="3%" />
+    <a href="https://twitter.com/ultralytics">
+        <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-social-twitter.png" width="3%"/>
+    </a>
+    <img width="3%" />
+    <a href="https://youtube.com/ultralytics">
+        <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-social-youtube.png" width="3%"/>
+    </a>
+    <img width="3%" />
+    <a href="https://www.facebook.com/ultralytics">
+        <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-social-facebook.png" width="3%"/>
+    </a>
+    <img width="3%" />
+    <a href="https://www.instagram.com/ultralytics/">
+        <img src="https://github.com/ultralytics/yolov5/releases/download/v1.0/logo-social-instagram.png" width="3%"/>
+    </a>
+</div>
